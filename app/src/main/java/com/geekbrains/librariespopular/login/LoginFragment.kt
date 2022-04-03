@@ -22,9 +22,14 @@ class LoginFragment: ViewBindingFragment<FragmentLoginBinding>(FragmentLoginBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setRetainInstance(true) // сохраняем состоянии фрагмента
         presenter = LoginPresenter()
         presenter?.onAttach(this)
 
+        loginButton()
+    }
+
+    private fun loginButton() {
         binding.loginButton.setOnClickListener {
             presenter?.onLogin(
                 binding.loginEditText.text.toString(),

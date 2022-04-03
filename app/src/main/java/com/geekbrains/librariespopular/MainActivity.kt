@@ -14,7 +14,7 @@ import com.geekbrains.librariespopular.login.LoginPresenter
 class MainActivity : AppCompatActivity() {
 
     private var presenter: LoginContract.Presenter? = null
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,17 +24,17 @@ class MainActivity : AppCompatActivity() {
             .commitNow()
 
             filterConnection()
-            restorePresenter()
+//          restorePresenter()
     }
 }
-    private fun restorePresenter(): LoginPresenter {
+/*    private fun restorePresenter(): LoginPresenter {
         val presenter = lastCustomNonConfigurationInstance as? LoginPresenter
         return presenter ?: LoginPresenter()
     }
 
     override fun onRetainCustomNonConfigurationInstance(): Any? {
         return presenter
-    }
+    }*/
 
     private fun filterConnection() {
     val filterConnection = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
