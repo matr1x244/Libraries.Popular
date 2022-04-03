@@ -7,9 +7,14 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.geekbrains.librariespopular.login.LoginContract
 import com.geekbrains.librariespopular.login.LoginFragment
+import com.geekbrains.librariespopular.login.LoginPresenter
 
 class MainActivity : AppCompatActivity() {
+
+    private var presenter: LoginContract.Presenter? = null
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,11 +23,20 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.containerMainActivity, LoginFragment.newInstance())
             .commitNow()
 
-        filterConnection()
+            filterConnection()
+            restorePresenter()
     }
 }
+    private fun restorePresenter(): LoginPresenter {
+        val presenter = lastCustomNonConfigurationInstance as? LoginPresenter
+        return presenter ?: LoginPresenter()
+    }
 
-private fun filterConnection() {
+    override fun onRetainCustomNonConfigurationInstance(): Any? {
+        return presenter
+    }
+
+    private fun filterConnection() {
     val filterConnection = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
     registerReceiver(networkStateReceiver, filterConnection)
 }
