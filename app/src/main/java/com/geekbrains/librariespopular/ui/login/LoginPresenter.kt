@@ -1,11 +1,11 @@
-package com.geekbrains.librariespopular.login
+package com.geekbrains.librariespopular.ui.login
 
 import android.os.Handler
 import android.os.Looper
 import java.lang.Thread.sleep
 
 
-class LoginPresenter: LoginContract.Presenter {
+class LoginPresenter : LoginContract.Presenter {
 
     private var view: LoginContract.View? = null
     private val uiHandler = Handler(Looper.getMainLooper())

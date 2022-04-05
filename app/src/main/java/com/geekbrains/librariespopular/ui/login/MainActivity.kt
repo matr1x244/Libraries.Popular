@@ -1,4 +1,4 @@
-package com.geekbrains.librariespopular.login
+package com.geekbrains.librariespopular.ui.login
 
 import android.app.Activity
 import android.graphics.Color

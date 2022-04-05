@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LibrariesPopular">
         <activity
-            android:name=".login.MainActivity"
+            android:name="com.geekbrains.librariespopular.ui.login.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.geekbrains.librariespopular.login
+package com.geekbrains.librariespopular.ui.login
 
 class LoginContract {
 
