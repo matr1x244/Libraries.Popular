@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.geekbrains.librariespopular.app
 import com.geekbrains.librariespopular.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), LoginContract.View {
@@ -20,15 +21,15 @@ class MainActivity : AppCompatActivity(), LoginContract.View {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        restorePresenter()
-        loginButton()
         presenter = restorePresenter()
         presenter?.onAttach(this)
+
+        loginButton()
     }
 
     private fun restorePresenter(): LoginPresenter {
         val presenter = lastCustomNonConfigurationInstance as? LoginPresenter
-        return presenter ?: LoginPresenter()
+        return presenter ?: LoginPresenter(app.loginApi)
     }
 
     override fun onRetainCustomNonConfigurationInstance(): Any? {

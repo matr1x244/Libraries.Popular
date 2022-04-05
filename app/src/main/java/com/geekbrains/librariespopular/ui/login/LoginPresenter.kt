@@ -2,10 +2,10 @@ package com.geekbrains.librariespopular.ui.login
 
 import android.os.Handler
 import android.os.Looper
-import java.lang.Thread.sleep
+import com.geekbrains.librariespopular.domain.LoginApi
 
 
-class LoginPresenter : LoginContract.Presenter {
+class LoginPresenter(private val api: LoginApi) : LoginContract.Presenter {
 
     private var view: LoginContract.View? = null
     private val uiHandler = Handler(Looper.getMainLooper())
@@ -16,18 +16,16 @@ class LoginPresenter : LoginContract.Presenter {
         this.view = view
         if (isSuccess) {
             view.setSuccess()
-        } else {
-            view.setError(errorText)
         }
     }
 
     override fun onLogin(login: String, password: String) {
         view?.showProgress()
         Thread {
-            sleep(3000)
+            val success = api.login(login, password)
             uiHandler.post {
                 view?.hideProgress()
-                if (checkCredentials(login, password)) {
+                if (success) {
                     view?.setSuccess()
                     isSuccess = true
                 } else {
@@ -37,11 +35,6 @@ class LoginPresenter : LoginContract.Presenter {
                 }
             }
         }.start()
-    }
-
-    /*сравниваем логин и пароль*/
-    private fun checkCredentials(login: String, password: String): Boolean {
-        return login == password
     }
 
     override fun onCredentialsChanged() {
