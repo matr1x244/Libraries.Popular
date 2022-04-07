@@ -2,7 +2,7 @@ package com.geekbrains.librariespopular.ui.login
 
 import androidx.annotation.MainThread
 
-class LoginContract {
+interface LoginContract {
 
     interface View {
         @MainThread

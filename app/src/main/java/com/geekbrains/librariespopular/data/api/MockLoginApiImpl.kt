@@ -1,21 +1,25 @@
-package com.geekbrains.librariespopular.data
+package com.geekbrains.librariespopular.data.api
 
 import com.geekbrains.librariespopular.domain.LoginApi
 
-class WebLoginApiImpl : LoginApi {
+class MockLoginApiImpl : LoginApi {
     override fun login(login: String, password: String): Boolean {
-        TODO("Not yet implemented")
+        Thread.sleep(3000)
+        return login == password
     }
 
     override fun register(login: String, password: String, email: String): Boolean {
-        TODO("Not yet implemented")
+        Thread.sleep(2000)
+        return login.isNotEmpty()
     }
 
     override fun logout(): Boolean {
-        TODO("Not yet implemented")
+        Thread.sleep(2000)
+        return true
     }
 
     override fun forgotPassword(login: String): Boolean {
-        TODO("Not yet implemented")
+        Thread.sleep(1000)
+        return false
     }
 }
