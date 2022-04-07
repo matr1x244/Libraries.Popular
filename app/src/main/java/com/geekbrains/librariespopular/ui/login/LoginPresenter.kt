@@ -1,14 +1,12 @@
 package com.geekbrains.librariespopular.ui.login
 
-import android.os.Handler
-import android.os.Looper
-import com.geekbrains.librariespopular.domain.LoginApi
+import com.geekbrains.librariespopular.domain.LoginUsecase
 
 
-class LoginPresenter(private val api: LoginApi) : LoginContract.Presenter {
-
+class LoginPresenter(
+    private val loginUsecase: LoginUsecase
+) : LoginContract.Presenter {
     private var view: LoginContract.View? = null
-    private val uiHandler = Handler(Looper.getMainLooper())
     private var isSuccess: Boolean = false
     private var errorText: String = ""
 
@@ -21,20 +19,17 @@ class LoginPresenter(private val api: LoginApi) : LoginContract.Presenter {
 
     override fun onLogin(login: String, password: String) {
         view?.showProgress()
-        Thread {
-            val success = api.login(login, password)
-            uiHandler.post {
-                view?.hideProgress()
-                if (success) {
-                    view?.setSuccess()
-                    isSuccess = true
-                } else {
-                    view?.setError("Неверный пароль")
-                    isSuccess = false
-                    errorText = "Неверный пароль"
-                }
+        loginUsecase.login(login, password) { result ->
+            view?.hideProgress()
+            if (result) {
+                view?.setSuccess()
+                isSuccess = true
+            } else {
+                view?.setError("Неверный пароль")
+                isSuccess = false
+                errorText = "Неверный пароль"
             }
-        }.start()
+        }
     }
 
     override fun onCredentialsChanged() {

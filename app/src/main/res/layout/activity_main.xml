@@ -27,6 +27,23 @@
             android:hint="@string/enter_password"
             android:singleLine="true" />
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/successText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/success"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_back"
+            android:visibility="gone"
+            app:icon="@android:drawable/radiobutton_on_background"
+            tools:visibility="visible" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/loginButton"
             android:layout_width="match_parent"

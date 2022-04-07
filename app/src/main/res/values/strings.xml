@@ -4,4 +4,6 @@
     <string name="enter_password">Введите пароль!</string>
     <string name="button_enter">Войти</string>
     <string name="error_message">Ошибка</string>
+    <string name="success">Успешно</string>
+    <string name="button_back">Назад</string>
 </resources>
