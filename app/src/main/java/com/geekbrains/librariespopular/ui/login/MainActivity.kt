@@ -8,6 +8,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.geekbrains.librariespopular.R
+import com.geekbrains.librariespopular.app
 import com.geekbrains.librariespopular.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), LoginContract.View {
@@ -20,15 +22,16 @@ class MainActivity : AppCompatActivity(), LoginContract.View {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        restorePresenter()
-        loginButton()
         presenter = restorePresenter()
         presenter?.onAttach(this)
+
+        loginButton()
+        backButton()
     }
 
     private fun restorePresenter(): LoginPresenter {
         val presenter = lastCustomNonConfigurationInstance as? LoginPresenter
-        return presenter ?: LoginPresenter()
+        return presenter ?: LoginPresenter(app.loginUsecase)
     }
 
     override fun onRetainCustomNonConfigurationInstance(): Any? {
@@ -44,12 +47,25 @@ class MainActivity : AppCompatActivity(), LoginContract.View {
         }
     }
 
+    private fun backButton() {
+        binding.backButton.setOnClickListener {
+            binding.loginButton.isVisible = true
+            binding.loginEditText.isVisible = true
+            binding.passwordEditText.isVisible = true
+            binding.successText.isVisible = false
+            binding.backButton.isVisible = false
+            binding.containerMainActivity.setBackgroundColor(Color.TRANSPARENT)
+        }
+    }
+
     override fun setSuccess() {
         binding.loginButton.isVisible = false
         binding.loginEditText.isVisible = false
         binding.passwordEditText.isVisible = false
+        binding.successText.isVisible = true
+        binding.backButton.isVisible = true
         binding.containerMainActivity.setBackgroundColor(Color.YELLOW)
-        Toast.makeText(this, "Успешно", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, this.getString(R.string.success), Toast.LENGTH_SHORT).show()
     }
 
     override fun setError(error: String) {
