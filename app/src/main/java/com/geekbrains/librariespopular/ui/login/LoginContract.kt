@@ -1,26 +1,15 @@
 package com.geekbrains.librariespopular.ui.login
 
 import androidx.annotation.MainThread
+import com.geekbrains.librariespopular.utils.Publisher
 
-class LoginContract {
+interface LoginContract {
 
-    interface View {
-        @MainThread
-        fun setSuccess()
-
-        @MainThread
-        fun setError(error: String)
-
-        @MainThread
-        fun showProgress()
-
-        @MainThread
-        fun hideProgress()
-    }
-
-    interface Presenter {
-        @MainThread
-        fun onAttach(view: View)
+    interface ViewModel {
+        val shouldShowProgress: Publisher<Boolean>
+        val isSuccess: Publisher<Boolean>
+        val errorText: Publisher<String?>
+        val successText: Publisher<String?>
 
         @MainThread
         fun onLogin(login: String, password: String)

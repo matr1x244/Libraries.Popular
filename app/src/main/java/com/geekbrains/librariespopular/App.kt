@@ -5,7 +5,7 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import com.geekbrains.librariespopular.data.LoginUsecaseImpl
-import com.geekbrains.librariespopular.data.MockLoginApiImpl
+import com.geekbrains.librariespopular.data.api.MockLoginApiImpl
 import com.geekbrains.librariespopular.domain.LoginApi
 import com.geekbrains.librariespopular.domain.LoginUsecase
 
